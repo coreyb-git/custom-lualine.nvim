@@ -1,6 +1,7 @@
-local ThemeColours = require("nub.customlualine.colours")
+local ThemeColours = require("custom-lualine.colours")
+local GeneralColours = require("custom-lualine.colours_general")
 
-local themeopts = {
+return {
 	options = {
 		theme = "default",
 		section_separators = { left = "", right = "" },
@@ -11,14 +12,17 @@ local themeopts = {
 		lualine_a = {
 			{
 				function()
-					return "  " .. require("lualine.utils.mode").get_mode() .. " "
+					return " " .. require("lualine.utils.mode").get_mode()
 				end,
+				padding = 1,
 			},
+
 			{
 				function()
 					return ""
 				end,
-				colors = { fg = GeneralColours.trim },
+				color = { fg = GeneralColours.trim },
+				padding = 0,
 			},
 		},
 
@@ -27,8 +31,8 @@ local themeopts = {
 				function()
 					return ""
 				end,
-				colors = { fg = GeneralColours.trim },
-				padding = { right = 1 },
+				color = { fg = GeneralColours.trim },
+				padding = { left = 0, right = 1 },
 			},
 
 			{ "branch", padding = { left = 0, right = 1 } },
@@ -37,7 +41,8 @@ local themeopts = {
 				function()
 					return ""
 				end,
-				colors = { fg = ThemeColours.normal.c.bg },
+				color = { fg = ThemeColours.normal.c.bg },
+				padding = 0,
 			},
 		},
 
@@ -45,8 +50,7 @@ local themeopts = {
 			{
 				"filetype",
 				draw_empty = true,
-				--				colored = false,
-				colored = true,
+				colored = false,
 				icon_only = true,
 				separator = "",
 				padding = { left = 1, right = 0 },
@@ -88,7 +92,10 @@ local themeopts = {
 				padding = 2,
 			},
 
-			{ "diagnostics", padding = { left = 0, right = 2 } },
+			{
+				"diagnostics",
+				padding = 2,
+			},
 		},
 
 		lualine_x = {
@@ -133,57 +140,40 @@ local themeopts = {
 				function()
 					return " "
 				end,
-				padding = 0,
+				padding = { left = 0, right = 0 },
 			},
 		},
 
 		lualine_y = {},
 
 		lualine_z = {
-
-			require("custom-lualine.pomo").get_icon_table(),
-			require("custom-lualine.pomo").get_text_table(),
-
-			--{ "upower" },
-			{
-				function()
-					local col = nil
-					if require("upower").is_below_level_low() then
-						col = GeneralColours.orange
-					end
-					if require("upower").is_below_level_critical()() then
-						col = GeneralColours.red
-					end
-					if require("upower").is_chargin() then
-						col = GeneralColours.green
-					end
-					return require("custom-lualine.cap").get_table(function()
-						return require("upower").get_status_icon()
-					end, col)
-				end,
-			},
+			require("custom-lualine.battery").get_icon_table(),
 			{
 				function()
 					return require("upower").get_status_text()
 				end,
-				padding = 0,
+				padding = 1,
+			},
+
+			require("custom-lualine.pomo").get_icon_table(),
+			require("custom-lualine.pomo").get_text_table(),
+
+			require("custom-lualine.cap").get_table(function()
+				return " "
+			end, nil, nil),
+			{
+				function()
+					local f = require("lualine.components.progress")
+					return f()
+				end,
+
+				padding = 1,
 			},
 
 			require("custom-lualine.cap").get_table(function()
 				return " "
-			end, nil),
+			end, nil, nil),
 			{ "datetime", padding = 1, style = "%a %R" },
-
-			require("custom-lualine.cap").get_table(function()
-				return " "
-			end, nil),
-			function()
-				local f = require("lualine.components.progress")
-				return f()
-			end,
-			padding = 0,
 		},
 	},
 }
-
-require("lualine").setup(themeopts)

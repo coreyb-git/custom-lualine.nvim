@@ -1,1 +1,1 @@
-return require("customlualine.colours")
+return require("custom-lualine.colours")

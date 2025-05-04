@@ -1,16 +1,27 @@
+local M = {}
+
+function M.setup(opts) end
+
 local events = {
-	["n"] = require("layout_normal"),
-	["v"] = require("layout_visual"),
-	["o"] = require("layout_operator"),
-	["i"] = require("layout_insert"),
-	["c"] = require("layout_command"),
-	["t1"] = require("layout_terminal"),
+	["n"] = require("custom-lualine.layout_normal"),
+	["v"] = require("custom-lualine.layout_visual"),
+	["o"] = require("custom-lualine.layout_operator"),
+	["i"] = require("custom-lualine.layout_insert"),
+	["c"] = require("custom-lualine.layout_command"),
+	["t"] = require("custom-lualine.layout_terminal"),
 }
 
+vim.api.nvim_create_augroup("customlualine", {})
 vim.api.nvim_create_autocmd("ModeChanged", {
 	pattern = { "*:*" },
 	callback = function()
-		local layout = events[vim.v.event]
+		local mode = vim.v.event.new_mode
+		local layout = events[mode]
 		require("lualine").setup(layout)
 	end,
 })
+vim.api.nvim_create_augroup("end", {})
+
+require("lualine").setup(events["n"])
+
+return M

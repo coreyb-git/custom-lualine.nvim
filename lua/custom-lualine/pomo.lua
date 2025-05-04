@@ -29,7 +29,9 @@ local function geticon()
 end
 
 function M.get_icon_table()
-	local t = require("custom-lualine.cap").get_table()
+	local t = require("custom-lualine.cap").get_table(function()
+		return ""
+	end, nil)
 	t[1] = geticon
 	return t
 end
@@ -39,7 +41,7 @@ function M.get_text_table()
 		function()
 			return pomo()
 		end,
-		padding = { left = 0, right = 0 },
+		padding = 1,
 	}
 end
 
