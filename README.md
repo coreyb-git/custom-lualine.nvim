@@ -16,6 +16,10 @@ return {
 		lazy = false,
 	},
 	{
+		"folke/noice.nvim",
+		opts = {},
+	},
+	{
 		"nvim-lualine/lualine.nvim",
 		opts = {
 			options = {
