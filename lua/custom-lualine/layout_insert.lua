@@ -1,6 +1,12 @@
 local ModeColours = require("custom-lualine.colours_mode")
 
 return {
+	options = {
+		theme = "default",
+		section_separators = { left = "", right = "" },
+		component_separators = { left = "", right = "" },
+	},
+
 	sections = {
 		lualine_a = {
 			{

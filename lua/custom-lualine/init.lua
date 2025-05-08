@@ -15,9 +15,7 @@ vim.api.nvim_create_augroup("customlualine", {})
 vim.api.nvim_create_autocmd("ModeChanged", {
 	pattern = { "*:*" },
 	callback = function()
-		local mode = vim.v.event.new_mode
-		local layout = events[mode]
-		require("lualine").setup(layout)
+		require("lualine").setup(events[vim.v.event.new_mode])
 	end,
 })
 vim.api.nvim_create_augroup("end", {})
