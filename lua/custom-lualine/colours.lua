@@ -31,8 +31,8 @@ local themecolours = {
 		z = { fg = z_fg, bg = z_bg },
 	},
 	insert = {
-		a = { fg = a_fg, bg = ModeColours.insert },
-		b = { fg = GeneralColours.black, bg = GeneralColours.black },
+		a = { fg = ModeColours.insert, bg = GeneralColours.black },
+		b = { fg = ModeColours.insert, bg = GeneralColours.black },
 		c = { fg = GeneralColours.black, bg = GeneralColours.black },
 
 		x = { fg = GeneralColours.black, bg = GeneralColours.black },

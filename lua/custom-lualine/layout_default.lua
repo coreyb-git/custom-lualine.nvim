@@ -3,7 +3,7 @@ local GeneralColours = require("custom-lualine.colours_general")
 
 return {
 	options = {
-		theme = "default",
+		--theme = "default",
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
 	},
@@ -16,34 +16,10 @@ return {
 				end,
 				padding = 1,
 			},
-
-			{
-				function()
-					return ""
-				end,
-				color = { fg = GeneralColours.trim },
-				padding = 0,
-			},
 		},
 
 		lualine_b = {
-			{
-				function()
-					return ""
-				end,
-				color = { fg = GeneralColours.trim },
-				padding = { left = 0, right = 1 },
-			},
-
-			{ "branch", padding = { left = 0, right = 1 } },
-
-			{
-				function()
-					return ""
-				end,
-				color = { fg = ThemeColours.normal.c.bg },
-				padding = 0,
-			},
+			{ "branch", padding = { left = 1, right = 1 } },
 		},
 
 		lualine_c = {
@@ -106,7 +82,7 @@ return {
 				cond = function()
 					return package.loaded["noice"] and require("noice").api.status.command.has()
 				end,
-				color = ThemeColours.normal.x,
+				--color = ThemeColours.normal.x,
 			},
 			{
 				function()

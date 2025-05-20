@@ -20,6 +20,7 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 })
 vim.api.nvim_create_augroup("end", {})
 
+require("lualine").setup({ options = { theme = "custom-lualine" } })
 require("lualine").setup(events["n"])
 
 return M

@@ -1,8 +1,6 @@
-local ModeColours = require("custom-lualine.colours_mode")
-
 return {
 	options = {
-		theme = "default",
+		--theme = "default",
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
 	},
@@ -17,16 +15,7 @@ return {
 			},
 		},
 
-		lualine_b = {
-			{
-				function()
-					return ""
-				end,
-				color = { fg = ModeColours.insert },
-				padding = 0,
-			},
-		},
-
+		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
