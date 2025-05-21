@@ -1,4 +1,4 @@
-GeneralColours = require("custom-lualine.colours_general")
+local GeneralColours = require("custom-lualine.colours_general")
 
 return {
 	normal = GeneralColours.purple,

@@ -1,6 +1,6 @@
 local M = {}
 
-require("custom-lualine.colours")
+local GeneralColours = require("custom-lualine.colours")
 
 function M.get_table(func_name, fg_colour, bg_colour)
 	if func_name == nil then
@@ -12,6 +12,7 @@ function M.get_table(func_name, fg_colour, bg_colour)
 	if bg_colour == nil then
 		bg_colour = GeneralColours.icons_bg
 	end
+
 	return {
 		func_name,
 		color = { fg = fg_colour, bg = bg_colour },

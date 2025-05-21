@@ -17,7 +17,7 @@ local x_bg = c_bg
 local y_fg = c_fg
 local y_bg = c_bg
 
-local z_fg = c_fg
+local z_fg = b_fg
 local z_bg = b_bg
 
 local themecolours = {

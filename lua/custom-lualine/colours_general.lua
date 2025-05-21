@@ -14,8 +14,8 @@ return {
 
 	trim = "#626483",
 
-	icons_fg = "#282A36", --blue
-	icons_bg = "#a1b1e3", --black
+	icons_fg = "#282A36", --black
+	icons_bg = "#a1b1e3", --blue
 
 	greygreen = "#77aa77",
 	greyred = "#aa7777",

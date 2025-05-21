@@ -16,10 +16,33 @@ return {
 				end,
 				padding = 1,
 			},
+			{
+				function()
+					return ""
+				end,
+				color = { fg = GeneralColours.trim },
+				padding = 0,
+			},
 		},
 
 		lualine_b = {
+			{
+				function()
+					return ""
+				end,
+				color = { fg = GeneralColours.trim },
+				padding = { left = 0, right = 1 },
+			},
+
 			{ "branch", padding = { left = 1, right = 1 } },
+
+			{
+				function()
+					return ""
+				end,
+				color = { fg = ThemeColours.normal.c.bg },
+				padding = 0,
+			},
 		},
 
 		lualine_c = {

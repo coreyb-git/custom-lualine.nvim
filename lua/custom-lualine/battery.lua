@@ -1,18 +1,22 @@
 local M = {}
 local function get_colour()
 	local GeneralColours = require("custom-lualine.colours_general")
-	local col = GeneralColours.icons_bg
+	local fgcolour = GeneralColours.icons_fg
+	local bgcolour = GeneralColours.icons_bg
 	if require("upower").is_below_level_low() then
-		col = GeneralColours.orange
+		fgcolour = GeneralColours.black
+		bgcolour = GeneralColours.orange
 	end
 	if require("upower").is_below_level_critical() then
-		col = GeneralColours.red
+		fgcolour = GeneralColours.black
+		bgcolour = GeneralColours.red
 	end
 	if require("upower").is_charging() then
-		col = GeneralColours.green
+		fgcolour = GeneralColours.black
+		bgcolour = GeneralColours.green
 	end
 
-	return { fg = GeneralColours.black, bg = col }
+	return { fg = fgcolour, bg = bgcolour }
 end
 
 function M.get_icon_table()
