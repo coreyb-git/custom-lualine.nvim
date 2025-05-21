@@ -1,6 +1,6 @@
 local M = {}
 
-local GeneralColours = require("custom-lualine.colours")
+local GeneralColours = require("custom-lualine.colours_general")
 
 function M.get_table(func_name, fg_colour, bg_colour)
 	if func_name == nil then
