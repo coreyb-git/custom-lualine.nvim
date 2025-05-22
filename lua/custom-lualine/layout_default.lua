@@ -31,10 +31,10 @@ return {
 					return ""
 				end,
 				color = { fg = GeneralColours.trim },
-				padding = { left = 0, right = 1 },
+				padding = 0,
 			},
 
-			{ "branch", padding = { left = 1, right = 1 } },
+			{ "branch", padding = 1 },
 
 			{
 				function()
