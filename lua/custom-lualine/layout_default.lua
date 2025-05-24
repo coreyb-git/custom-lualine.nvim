@@ -146,6 +146,14 @@ return {
 		lualine_y = {},
 
 		lualine_z = {
+			require("custom-lualine.pomo").get_icon_table(),
+			require("custom-lualine.pomo").get_text_table(),
+
+			require("custom-lualine.cap").get_table(function()
+				return require("spotify-player.llinit").get_icon()
+			end, nil, nil),
+			"spotify-player",
+
 			require("custom-lualine.battery").get_icon_table(),
 			{
 				function()
@@ -153,9 +161,6 @@ return {
 				end,
 				padding = 1,
 			},
-
-			require("custom-lualine.pomo").get_icon_table(),
-			require("custom-lualine.pomo").get_text_table(),
 
 			require("custom-lualine.cap").get_table(function()
 				return " "

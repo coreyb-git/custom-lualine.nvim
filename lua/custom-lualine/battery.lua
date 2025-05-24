@@ -27,8 +27,6 @@ function M.get_icon_table()
 	t.color = function()
 		return get_colour()
 	end
-	t.padding.left = 0
-	t.padding.right = 0
 	return t
 end
 
