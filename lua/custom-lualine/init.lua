@@ -11,12 +11,16 @@ local events = {
 	["t"] = require("custom-lualine.layout_terminal"),
 }
 
+local function updateLuaLine()
+	vim.schedule(function()
+		require("lualine").setup(events[vim.api.nvim_get_mode().mode])
+	end)
+end
+
 vim.api.nvim_create_augroup("customlualine", {})
 vim.api.nvim_create_autocmd("ModeChanged", {
 	pattern = { "*:*" },
-	callback = function()
-		require("lualine").setup(events[vim.v.event.new_mode])
-	end,
+	callback = updateLuaLine,
 })
 vim.api.nvim_create_augroup("end", {})
 
