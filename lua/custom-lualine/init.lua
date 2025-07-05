@@ -12,8 +12,9 @@ local events = {
 }
 
 local function updateLuaLine()
+	local mode = vim.api.nvim_get_mode().mode
 	vim.schedule(function()
-		require("lualine").setup(events[vim.api.nvim_get_mode().mode])
+		require("lualine").setup(events[mode])
 	end)
 end
 
