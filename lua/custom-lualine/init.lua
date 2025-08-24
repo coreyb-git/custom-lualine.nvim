@@ -18,16 +18,18 @@ local function updateLuaLine()
 	end)
 end
 
-vim.api.nvim_create_augroup("customlualine", {})
+local cll_group = vim.api.nvim_create_augroup("customlualine", { clear = true })
 vim.api.nvim_create_autocmd("ModeChanged", {
+	group = cll_group,
 	pattern = { "*:*" },
 	callback = updateLuaLine,
 })
-vim.api.nvim_create_augroup("end", {})
+--vim.api.nvim_create_augroup("end", {})
 
 vim.cmd("set cmdheight=0")
 
-require("lualine").setup({ options = { theme = "custom-lualine" } })
-require("lualine").setup(events["n"])
+--	require("lualine").setup({ options = { theme = "custom-lualine" } })
+--	require("lualine").setup(events["n"])
+vim.schedule(updateLuaLine)
 
 return M

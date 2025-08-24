@@ -4,6 +4,7 @@ local GeneralColours = require("custom-lualine.colours_general")
 return {
 	options = {
 		--theme = "default",
+		theme = "custom-lualine",
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "", right = "" },
 	},
@@ -149,10 +150,13 @@ return {
 			require("custom-lualine.pomo").get_icon_table(),
 			require("custom-lualine.pomo").get_text_table(),
 
+			--[[
 			require("custom-lualine.cap").get_table(function()
 				return require("spotify-player.llinit").get_icon()
 			end, nil, nil),
 			"spotify-player",
+			]]
+			--
 
 			require("custom-lualine.battery").get_icon_table(),
 			{

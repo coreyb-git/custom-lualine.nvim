@@ -15,6 +15,10 @@ local function get_colour()
 		fgcolour = GeneralColours.black
 		bgcolour = GeneralColours.green
 	end
+	if require("upower").is_fully_charged() then
+		fgcolour = GeneralColours.black
+		bgcolour = GeneralColours.green
+	end
 
 	return { fg = fgcolour, bg = bgcolour }
 end
