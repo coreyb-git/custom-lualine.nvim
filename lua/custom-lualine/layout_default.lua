@@ -13,13 +13,15 @@ return {
 		lualine_a = {
 			{
 				function()
-					return " " .. require("lualine.utils.mode").get_mode()
+					local m = require("lualine.utils.mode").get_mode()
+					return " " .. m --string.sub(m, 1, 1)
 				end,
 				padding = 1,
 			},
 			{
 				function()
-					return ""
+					--					return ""
+					return ""
 				end,
 				color = { fg = GeneralColours.trim },
 				padding = 0,
@@ -29,7 +31,8 @@ return {
 		lualine_b = {
 			{
 				function()
-					return ""
+					--					return ""
+					return ""
 				end,
 				color = { fg = GeneralColours.trim },
 				padding = 0,
@@ -39,7 +42,8 @@ return {
 
 			{
 				function()
-					return ""
+					--	return ""
+					return ""
 				end,
 				color = { fg = ThemeColours.normal.c.bg },
 				padding = 0,
@@ -101,6 +105,16 @@ return {
 		lualine_x = {
 			{
 				function()
+					local rec = vim.fn.reg_recording()
+					if rec ~= "" then
+						return "Recording @" .. rec
+					end
+					return ""
+				end,
+			},
+
+			--[[			{
+				function()
 					return require("noice").api.status.command.get()
 				end,
 				cond = function()
@@ -115,8 +129,10 @@ return {
 				cond = function()
 					return package.loaded["noice"] and require("noice").api.status.mode.has()
 				end,
-				color = ThemeColours.normal.x,
+				--color = ThemeColours.normal.x,
 			},
+			]]
+
 			{
 				function()
 					return "  " .. require("dap").status()

@@ -24,7 +24,6 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 	pattern = { "*:*" },
 	callback = updateLuaLine,
 })
---vim.api.nvim_create_augroup("end", {})
 
 vim.cmd("set cmdheight=0")
 
