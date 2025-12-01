@@ -189,7 +189,8 @@ return {
 			{
 				function()
 					local f = require("lualine.components.progress")
-					return f()
+					local s = vim.fn.line(".") .. " " .. f()
+					return s
 				end,
 
 				padding = 1,
