@@ -19,9 +19,15 @@ local function updateLuaLine()
 end
 
 local cll_group = vim.api.nvim_create_augroup("customlualine", { clear = true })
+
 vim.api.nvim_create_autocmd("ModeChanged", {
 	group = cll_group,
 	pattern = { "*:*" },
+	callback = updateLuaLine,
+})
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = cll_group,
+	pattern = "*",
 	callback = updateLuaLine,
 })
 
