@@ -13,9 +13,9 @@ return {
 		lualine_a = {
 			{
 				function()
-					--local m = require("lualine.utils.mode").get_mode()
-					--return " " .. m --string.sub(m, 1, 1)
-					return require("lualine.utils.mode").get_mode()
+					--return require("lualine.utils.mode").get_mode()
+					local m = require("lualine.utils.mode").get_mode()
+					return string.sub(m, 1, 1)
 				end,
 				padding = 1,
 			},
