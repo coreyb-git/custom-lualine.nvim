@@ -18,8 +18,10 @@ local function updateLuaLine()
 		command_height = 1
 	end
 	vim.cmd("set cmdheight=" .. command_height)
+
+	local layout = events[mode] or require("custom-lualine.layout_unknown")
 	vim.schedule(function()
-		require("lualine").setup(events[mode])
+		require("lualine").setup(layout)
 	end)
 end
 
@@ -35,6 +37,41 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	pattern = "*",
 	callback = updateLuaLine,
 })
+
+-- throttle
+local is_idle = false
+
+local function set_refresh(rate)
+	vim.schedule(function()
+		require("lualine").setup({
+			options = {
+				refresh = {
+					refresh_time = rate,
+				},
+			},
+		})
+	end)
+end
+
+vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+	group = cll_group,
+	callback = function()
+		if is_idle then
+			set_refresh(math.floor(1000 / 15))
+		end
+		is_idle = false
+	end,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+	group = cll_group,
+	callback = function()
+		set_refresh(9000)
+		is_idle = true
+	end,
+})
+
+----
 
 --	require("lualine").setup({ options = { theme = "custom-lualine" } })
 --	require("lualine").setup(events["n"])
