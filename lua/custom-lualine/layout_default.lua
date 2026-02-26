@@ -157,7 +157,7 @@ return {
 					return require("lazy.status").updates()
 				end,
 				cond = function()
-					return require("lazy.status").has_updates()
+					return package.loaded["lazy"] and require("lazy.status").has_updates()
 				end,
 				color = ThemeColours.normal.x,
 			},
