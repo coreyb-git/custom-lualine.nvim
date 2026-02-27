@@ -19,10 +19,12 @@ local function updateLuaLine()
 	end
 	vim.cmd("set cmdheight=" .. command_height)
 
-	local layout = events[mode] or require("custom-lualine.layout_unknown")
-	vim.schedule(function()
-		require("lualine").setup(layout)
-	end)
+	local layout = events[mode]
+	if layout then
+		vim.schedule(function()
+			require("lualine").setup(layout)
+		end)
+	end
 end
 
 local cll_group = vim.api.nvim_create_augroup("customlualine", { clear = true })
