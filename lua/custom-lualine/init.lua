@@ -1,6 +1,8 @@
 local M = {}
 
-function M.setup(opts) end
+function M.setup(opts)
+	--
+end
 
 local events = {
 	["n"] = require("custom-lualine.layout_normal"),
@@ -27,15 +29,18 @@ local function updateLuaLine()
 	end
 end
 
-local cll_group = vim.api.nvim_create_augroup("customlualine", { clear = true })
+local custom_ll_group = vim.api.nvim_create_augroup("customlualine", { clear = true })
 
 vim.api.nvim_create_autocmd("ModeChanged", {
-	group = cll_group,
-	pattern = { "*:*" },
-	callback = updateLuaLine,
+	group = custom_ll_group,
+	--pattern = { "*:*" },
+	callback = function()
+		updateLuaLine()
+		vim.cmd("redrawstatus")
+	end,
 })
 vim.api.nvim_create_autocmd("ColorScheme", {
-	group = cll_group,
+	group = custom_ll_group,
 	pattern = "*",
 	callback = updateLuaLine,
 })
@@ -56,8 +61,13 @@ local function set_refresh(rate)
 end
 
 vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-	group = cll_group,
+	group = custom_ll_group,
 	callback = function()
+		-- typing in insert mode triggers this event.
+		if vim.api.nvim_get_mode().mode == "i" then
+			return
+		end
+
 		if is_idle then
 			set_refresh(math.floor(1000 / 15))
 		end
@@ -66,7 +76,7 @@ vim.api.nvim_create_autocmd({ "CursorMoved" }, {
 })
 
 vim.api.nvim_create_autocmd("CursorHold", {
-	group = cll_group,
+	group = custom_ll_group,
 	callback = function()
 		set_refresh(9000)
 		is_idle = true
@@ -75,8 +85,6 @@ vim.api.nvim_create_autocmd("CursorHold", {
 
 ----
 
---	require("lualine").setup({ options = { theme = "custom-lualine" } })
---	require("lualine").setup(events["n"])
 vim.schedule(updateLuaLine)
 
 return M
