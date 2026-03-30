@@ -7,6 +7,7 @@ end
 local events = {
 	["n"] = require("custom-lualine.layout_normal"),
 	["v"] = require("custom-lualine.layout_visual"),
+	["V"] = require("custom-lualine.layout_visual"),
 	["o"] = require("custom-lualine.layout_operator"),
 	["i"] = require("custom-lualine.layout_insert"),
 	["c"] = require("custom-lualine.layout_command"),
@@ -25,18 +26,38 @@ local function updateLuaLine()
 	if layout then
 		vim.schedule(function()
 			require("lualine").setup(layout)
+			-- doesn't seem to redraw on visual line mode.
+			vim.cmd("redrawstatus")
 		end)
 	end
 end
 
 local custom_ll_group = vim.api.nvim_create_augroup("customlualine", { clear = true })
 
+local function is_insert_mode()
+	if string.sub(vim.api.nvim_get_mode().mode, 1, 1) == "i" then
+		return true
+	end
+	return false
+end
+
 vim.api.nvim_create_autocmd("ModeChanged", {
 	group = custom_ll_group,
 	--pattern = { "*:*" },
 	callback = function()
-		updateLuaLine()
-		vim.cmd("redrawstatus")
+		local do_update = false
+		local mode = vim.api.nvim_get_mode().mode
+		if mode:len() < 2 then -- don't run on popups etc.
+			do_update = true
+		else
+			if not is_insert_mode() then
+				do_update = true
+			end
+		end
+
+		if do_update then
+			updateLuaLine()
+		end
 	end,
 })
 vim.api.nvim_create_autocmd("ColorScheme", {
@@ -63,8 +84,8 @@ end
 vim.api.nvim_create_autocmd({ "CursorMoved" }, {
 	group = custom_ll_group,
 	callback = function()
-		-- typing in insert mode triggers this event.
-		if vim.api.nvim_get_mode().mode == "i" then
+		-- typing in insert mode, and insert mode popups, trigger this event.
+		if is_insert_mode() then
 			return
 		end
 
